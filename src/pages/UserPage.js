@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
@@ -24,8 +23,8 @@ import {
 import Label from '../components/label';
 import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
-import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
-import USER_LIST from '../_mock/user';
+import { UserListHead, UserListToolbar } from '../sections/user';
+import { USER_LIST } from '../data';
 
 // ----------------------------------------------------------------------
 
@@ -144,10 +143,6 @@ export default function UserPage() {
 
   return (
     <>
-      <Helmet>
-        <title> User List </title>
-      </Helmet>
-
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>

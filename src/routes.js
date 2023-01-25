@@ -1,7 +1,5 @@
-import { Navigate, useRoutes } from 'react-router-dom';
-// layouts
+import { useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
-//
 import UserPage from './pages/UserPage';
 
 // ----------------------------------------------------------------------
@@ -11,10 +9,7 @@ export default function Router() {
     {
       path: '',
       element: <DashboardLayout />,
-      children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'user', element: <UserPage /> },
-      ],
+      children: [{ path: '', element: <UserPage /> }],
     },
   ]);
 

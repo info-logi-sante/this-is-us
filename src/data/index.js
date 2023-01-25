@@ -1,11 +1,15 @@
 import { faker } from '@faker-js/faker';
 import { sample } from 'lodash';
 
-// ----------------------------------------------------------------------
+export const account = {
+  displayName: 'Jaydon Frankie',
+  email: 'demo@minimals.cc',
+  photoURL: '/avatar_default.jpg',
+};
 
-const users = [...Array(24)].map((_, index) => ({
+export const USER_LIST = [...Array(24)].map((_, index) => ({
   id: faker.datatype.uuid(),
-  avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+  avatarUrl: `/avatar_${index + 1}.jpg`,
   name: faker.name.fullName(),
   company: faker.company.name(),
   isVerified: faker.datatype.boolean(),
@@ -23,5 +27,3 @@ const users = [...Array(24)].map((_, index) => ({
     'Full Stack Developer',
   ]),
 }));
-
-export default users;
