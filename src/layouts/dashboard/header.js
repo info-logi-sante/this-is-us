@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { noCase } from 'change-case';
-import PropTypes from 'prop-types';
-import { alpha, styled } from '@mui/material/styles';
+import { useState } from "react";
+import { noCase } from "change-case";
+import { alpha, styled } from "@mui/material/styles";
 import {
   Box,
   Stack,
@@ -18,24 +17,24 @@ import {
   ListItemText,
   ListItemAvatar,
   ListItemButton,
-} from '@mui/material';
-import { bgBlur } from '../../utils/cssStyles';
-import { fToNow } from '../../utils/formatTime';
-import Iconify from '../../components/iconify';
-import { account } from '../../data';
+} from "@mui/material";
+import { bgBlur } from "../../utils/cssStyles";
+import { fToNow } from "../../utils/formatTime";
+import Iconify from "../../components/iconify";
+import { account } from "../../data";
 
 const MENU_OPTIONS = [
   {
-    label: 'Home',
-    icon: 'eva:home-fill',
+    label: "Home",
+    icon: "eva:home-fill",
   },
   {
-    label: 'Profile',
-    icon: 'eva:person-fill',
+    label: "Profile",
+    icon: "eva:person-fill",
   },
   {
-    label: 'Settings',
-    icon: 'eva:settings-2-fill',
+    label: "Settings",
+    icon: "eva:settings-2-fill",
   },
 ];
 
@@ -57,13 +56,13 @@ export const AccountPopover = () => {
         sx={{
           p: 0,
           ...(open && {
-            '&:before': {
+            "&:before": {
               zIndex: 1,
               content: "''",
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
-              position: 'absolute',
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              position: "absolute",
               bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
             },
           }),
@@ -76,16 +75,16 @@ export const AccountPopover = () => {
         open={Boolean(open)}
         anchorEl={open}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         PaperProps={{
           sx: {
             p: 0,
             mt: 1.5,
             ml: 0.75,
             width: 180,
-            '& .MuiMenuItem-root': {
-              typography: 'body2',
+            "& .MuiMenuItem-root": {
+              typography: "body2",
               borderRadius: 0.75,
             },
           },
@@ -95,12 +94,12 @@ export const AccountPopover = () => {
           <Typography variant="subtitle2" noWrap>
             {account.displayName}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
             {account.email}
           </Typography>
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: "dashed" }} />
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
@@ -110,7 +109,7 @@ export const AccountPopover = () => {
           ))}
         </Stack>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: "dashed" }} />
 
         <MenuItem onClick={handleClose} sx={{ m: 1 }}>
           Logout
@@ -122,19 +121,19 @@ export const AccountPopover = () => {
 
 const LANGS = [
   {
-    value: 'en',
-    label: 'English',
-    icon: '/ic_flag_en.svg',
+    value: "en",
+    label: "English",
+    icon: "/ic_flag_en.svg",
   },
   {
-    value: 'de',
-    label: 'German',
-    icon: '/ic_flag_de.svg',
+    value: "de",
+    label: "German",
+    icon: "/ic_flag_de.svg",
   },
   {
-    value: 'fr',
-    label: 'French',
-    icon: '/ic_flag_fr.svg',
+    value: "fr",
+    label: "French",
+    icon: "/ic_flag_fr.svg",
   },
 ];
 
@@ -158,7 +157,11 @@ export const LanguagePopover = () => {
           width: 44,
           height: 44,
           ...(open && {
-            bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity),
+            bgcolor: (theme) =>
+              alpha(
+                theme.palette.primary.main,
+                theme.palette.action.focusOpacity
+              ),
           }),
         }}
       >
@@ -169,17 +172,17 @@ export const LanguagePopover = () => {
         open={Boolean(open)}
         anchorEl={open}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         PaperProps={{
           sx: {
             p: 1,
             mt: 1.5,
             ml: 0.75,
             width: 180,
-            '& .MuiMenuItem-root': {
+            "& .MuiMenuItem-root": {
               px: 1,
-              typography: 'body2',
+              typography: "body2",
               borderRadius: 0.75,
             },
           },
@@ -187,8 +190,17 @@ export const LanguagePopover = () => {
       >
         <Stack spacing={0.75}>
           {LANGS.map((option) => (
-            <MenuItem key={option.value} selected={option.value === LANGS[0].value} onClick={() => handleClose()}>
-              <Box component="img" alt={option.label} src={option.icon} sx={{ width: 28, mr: 2 }} />
+            <MenuItem
+              key={option.value}
+              selected={option.value === LANGS[0].value}
+              onClick={() => handleClose()}
+            >
+              <Box
+                component="img"
+                alt={option.label}
+                src={option.icon}
+                sx={{ width: 28, mr: 2 }}
+              />
 
               {option.label}
             </MenuItem>
@@ -202,7 +214,9 @@ export const LanguagePopover = () => {
 export const NotificationsPopover = () => {
   const [notifications, setNotifications] = useState([]);
 
-  const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
+  const totalUnRead = notifications.filter(
+    (item) => item.isUnRead === true
+  ).length;
 
   const [open, setOpen] = useState(null);
 
@@ -225,7 +239,11 @@ export const NotificationsPopover = () => {
 
   return (
     <>
-      <IconButton color={open ? 'primary' : 'default'} onClick={handleOpen} sx={{ width: 40, height: 40 }}>
+      <IconButton
+        color={open ? "primary" : "default"}
+        onClick={handleOpen}
+        sx={{ width: 40, height: 40 }}
+      >
         <Badge badgeContent={totalUnRead} color="error">
           <Iconify icon="eva:bell-fill" />
         </Badge>
@@ -235,8 +253,8 @@ export const NotificationsPopover = () => {
         open={Boolean(open)}
         anchorEl={open}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         PaperProps={{
           sx: {
             mt: 1.5,
@@ -245,10 +263,10 @@ export const NotificationsPopover = () => {
           },
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
+        <Box sx={{ display: "flex", alignItems: "center", py: 2, px: 2.5 }}>
           <Box sx={{ flexGrow: 1 }}>
             <Typography variant="subtitle1">Notifications</Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>
               You have {totalUnRead} unread messages
             </Typography>
           </Box>
@@ -266,18 +284,6 @@ export const NotificationsPopover = () => {
   );
 };
 
-NotificationItem.propTypes = {
-  notification: PropTypes.shape({
-    createdAt: PropTypes.instanceOf(Date),
-    id: PropTypes.string,
-    isUnRead: PropTypes.bool,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    type: PropTypes.string,
-    avatar: PropTypes.any,
-  }),
-};
-
 function NotificationItem({ notification }) {
   const { avatar, title } = renderContent(notification);
 
@@ -286,14 +292,14 @@ function NotificationItem({ notification }) {
       sx={{
         py: 1.5,
         px: 2.5,
-        mt: '1px',
+        mt: "1px",
         ...(notification.isUnRead && {
-          bgcolor: 'action.selected',
+          bgcolor: "action.selected",
         }),
       }}
     >
       <ListItemAvatar>
-        <Avatar sx={{ bgcolor: 'background.neutral' }}>{avatar}</Avatar>
+        <Avatar sx={{ bgcolor: "background.neutral" }}>{avatar}</Avatar>
       </ListItemAvatar>
       <ListItemText
         primary={title}
@@ -302,12 +308,15 @@ function NotificationItem({ notification }) {
             variant="caption"
             sx={{
               mt: 0.5,
-              display: 'flex',
-              alignItems: 'center',
-              color: 'text.disabled',
+              display: "flex",
+              alignItems: "center",
+              color: "text.disabled",
             }}
           >
-            <Iconify icon="eva:clock-outline" sx={{ mr: 0.5, width: 16, height: 16 }} />
+            <Iconify
+              icon="eva:clock-outline"
+              sx={{ mr: 0.5, width: 16, height: 16 }}
+            />
             {fToNow(notification.createdAt)}
           </Typography>
         }
@@ -320,45 +329,71 @@ function renderContent(notification) {
   const title = (
     <Typography variant="subtitle2">
       {notification.title}
-      <Typography component="span" variant="body2" sx={{ color: 'text.secondary' }}>
+      <Typography
+        component="span"
+        variant="body2"
+        sx={{ color: "text.secondary" }}
+      >
         &nbsp; {noCase(notification.description)}
       </Typography>
     </Typography>
   );
 
-  if (notification.type === 'order_placed') {
+  if (notification.type === "order_placed") {
     return {
-      avatar: <img alt={notification.title} src="/assets/icons/ic_notification_package.svg" />,
+      avatar: (
+        <img
+          alt={notification.title}
+          src="/assets/icons/ic_notification_package.svg"
+        />
+      ),
       title,
     };
   }
-  if (notification.type === 'order_shipped') {
+  if (notification.type === "order_shipped") {
     return {
-      avatar: <img alt={notification.title} src="/assets/icons/ic_notification_shipping.svg" />,
+      avatar: (
+        <img
+          alt={notification.title}
+          src="/assets/icons/ic_notification_shipping.svg"
+        />
+      ),
       title,
     };
   }
-  if (notification.type === 'mail') {
+  if (notification.type === "mail") {
     return {
-      avatar: <img alt={notification.title} src="/assets/icons/ic_notification_mail.svg" />,
+      avatar: (
+        <img
+          alt={notification.title}
+          src="/assets/icons/ic_notification_mail.svg"
+        />
+      ),
       title,
     };
   }
-  if (notification.type === 'chat_message') {
+  if (notification.type === "chat_message") {
     return {
-      avatar: <img alt={notification.title} src="/assets/icons/ic_notification_chat.svg" />,
+      avatar: (
+        <img
+          alt={notification.title}
+          src="/assets/icons/ic_notification_chat.svg"
+        />
+      ),
       title,
     };
   }
   return {
-    avatar: notification.avatar ? <img alt={notification.title} src={notification.avatar} /> : null,
+    avatar: notification.avatar ? (
+      <img alt={notification.title} src={notification.avatar} />
+    ) : null,
     title,
   };
 }
 
 const StyledRoot = styled(AppBar)(({ theme }) => ({
   ...bgBlur({ color: theme.palette.background.default }),
-  boxShadow: 'none',
+  boxShadow: "none",
 }));
 
 const StyledToolbar = styled(Toolbar)(() => ({
@@ -372,8 +407,8 @@ export const Header = ({ onOpenNav }) => (
         onClick={onOpenNav}
         sx={{
           mr: 1,
-          color: 'text.primary',
-          display: { lg: 'none' },
+          color: "text.primary",
+          display: { lg: "none" },
         }}
       >
         <Iconify icon="eva:menu-2-fill" />
@@ -396,7 +431,3 @@ export const Header = ({ onOpenNav }) => (
     </StyledToolbar>
   </StyledRoot>
 );
-
-Header.propTypes = {
-  onOpenNav: PropTypes.func,
-};

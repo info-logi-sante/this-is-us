@@ -1,13 +1,5 @@
-import PropTypes from 'prop-types';
-import { memo } from 'react';
-import { StyledRootScrollbar, StyledScrollbar } from './styles';
-
-// ----------------------------------------------------------------------
-
-Scrollbar.propTypes = {
-  sx: PropTypes.object,
-  children: PropTypes.node,
-};
+import { memo } from "react";
+import { StyledRootScrollbar, StyledScrollbar } from "./styles";
 
 function Scrollbar({ children, sx, ...other }) {
   return (
