@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { noCase } from "change-case";
+import { formatDistanceToNow } from "date-fns";
 import { alpha, styled } from "@mui/material/styles";
 import {
   Box,
@@ -19,9 +20,16 @@ import {
   ListItemButton,
 } from "@mui/material";
 import { bgBlur } from "../../utils/cssStyles";
-import { fToNow } from "../../utils/formatTime";
-import Iconify from "../../components/iconify";
+import { Iconify } from "../../components/iconify";
 import { account } from "../../data";
+
+const fToNow = (date) => {
+  return date
+    ? formatDistanceToNow(new Date(date), {
+        addSuffix: true,
+      })
+    : "";
+};
 
 const MENU_OPTIONS = [
   {

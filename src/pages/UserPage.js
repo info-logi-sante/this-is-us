@@ -21,7 +21,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import Label from "../components/label";
-import Iconify from "../components/iconify";
+import { Iconify } from "../components/iconify";
 import Scrollbar from "../components/scrollbar";
 import { UserListHead, UserListToolbar } from "../sections/user";
 import { USER_LIST } from "../data";
