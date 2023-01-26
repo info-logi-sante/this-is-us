@@ -1,39 +1,27 @@
 import { filter } from "lodash";
-import { sentenceCase } from "change-case";
 import { useState } from "react";
 import {
   Card,
   Table,
   Stack,
   Paper,
-  Avatar,
   Button,
   Popover,
-  Checkbox,
   TableRow,
   MenuItem,
   TableBody,
   TableCell,
   Container,
   Typography,
-  IconButton,
   TableContainer,
   TablePagination,
 } from "@mui/material";
-import Label from "../components/label";
 import { Iconify } from "../components/iconify";
 import Scrollbar from "../components/scrollbar";
 import { UserListHead, UserListToolbar } from "../sections/user";
-import { USER_LIST } from "../data";
-
-const TABLE_HEAD = [
-  { id: "name", label: "Name", alignRight: false },
-  { id: "company", label: "Company", alignRight: false },
-  { id: "role", label: "Role", alignRight: false },
-  { id: "isVerified", label: "Verified", alignRight: false },
-  { id: "status", label: "Status", alignRight: false },
-  { id: "" },
-];
+import { ListeUtilisateurs } from "../data/ListeUtilisateurs";
+import { EnteteTableau } from "../data/EnteteTableau";
+import { Tableau } from "../data/Tableau";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -92,7 +80,7 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = USER_LIST.map((n) => n.name);
+      const newSelected = ListeUtilisateurs.map((n) => n.name);
       setSelected(newSelected);
       return;
     }
@@ -132,10 +120,12 @@ export default function UserPage() {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USER_LIST.length) : 0;
+    page > 0
+      ? Math.max(0, (1 + page) * rowsPerPage - ListeUtilisateurs.length)
+      : 0;
 
   const filteredUsers = applySortFilter(
-    USER_LIST,
+    ListeUtilisateurs,
     getComparator(order, orderBy),
     filterName
   );
@@ -152,7 +142,7 @@ export default function UserPage() {
           mb={5}
         >
           <Typography variant="h4" gutterBottom>
-            User List
+            Utilisateurs
           </Typography>
           <Button
             variant="contained"
@@ -175,91 +165,21 @@ export default function UserPage() {
                 <UserListHead
                   order={order}
                   orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={USER_LIST.length}
+                  headLabel={EnteteTableau}
+                  rowCount={ListeUtilisateurs.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
-                <TableBody>
-                  {filteredUsers
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      const {
-                        id,
-                        name,
-                        role,
-                        status,
-                        company,
-                        avatarUrl,
-                        isVerified,
-                      } = row;
-                      const selectedUser = selected.indexOf(name) !== -1;
-
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={selectedUser}
-                        >
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={selectedUser}
-                              onChange={(event) => handleClick(event, name)}
-                            />
-                          </TableCell>
-
-                          <TableCell component="th" scope="row" padding="none">
-                            <Stack
-                              direction="row"
-                              alignItems="center"
-                              spacing={2}
-                            >
-                              <Avatar alt={name} src={avatarUrl} />
-                              <Typography variant="subtitle2" noWrap>
-                                {name}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
-
-                          <TableCell align="left">{company}</TableCell>
-
-                          <TableCell align="left">{role}</TableCell>
-
-                          <TableCell align="left">
-                            {isVerified ? "Yes" : "No"}
-                          </TableCell>
-
-                          <TableCell align="left">
-                            <Label
-                              color={
-                                (status === "banned" && "error") || "success"
-                              }
-                            >
-                              {sentenceCase(status)}
-                            </Label>
-                          </TableCell>
-
-                          <TableCell align="right">
-                            <IconButton
-                              size="large"
-                              color="inherit"
-                              onClick={handleOpenMenu}
-                            >
-                              <Iconify icon={"eva:more-vertical-fill"} />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
+                <Tableau
+                  filteredUsers={filteredUsers}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  selected={selected}
+                  handleOpenMenu={handleOpenMenu}
+                  handleClick={handleClick}
+                  emptyRows={emptyRows}
+                />
 
                 {isNotFound && (
                   <TableBody>
@@ -292,7 +212,7 @@ export default function UserPage() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USER_LIST.length}
+            count={ListeUtilisateurs.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

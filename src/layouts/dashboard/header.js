@@ -21,7 +21,12 @@ import {
 } from "@mui/material";
 import { bgBlur } from "../../utils/cssStyles";
 import { Iconify } from "../../components/iconify";
-import { account } from "../../data";
+
+export const account = {
+  displayName: "John Appleseed",
+  email: "john@email.com",
+  photoURL: "/avatar_default.jpg",
+};
 
 const fToNow = (date) => {
   return date
@@ -134,14 +139,14 @@ const LANGS = [
     icon: "/ic_flag_en.svg",
   },
   {
-    value: "de",
-    label: "German",
-    icon: "/ic_flag_de.svg",
-  },
-  {
     value: "fr",
     label: "French",
     icon: "/ic_flag_fr.svg",
+  },
+  {
+    value: "de",
+    label: "German",
+    icon: "/ic_flag_de.svg",
   },
 ];
 
