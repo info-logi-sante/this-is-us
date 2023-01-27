@@ -19,9 +19,10 @@ import {
 import { Iconify } from "../components/iconify";
 import Scrollbar from "../components/scrollbar";
 import { UserListHead, UserListToolbar } from "../sections/user";
-import { ListeUtilisateurs } from "../data/ListeUtilisateurs";
+import { ListeUtilisateurs as UserList } from "../data/ListeUtilisateurs";
 import { EnteteTableau } from "../data/EnteteTableau";
 import { Tableau } from "../data/Tableau";
+import { SupprimerUtilisateur } from "../data/SupprimerUtilisateurs";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -63,6 +64,7 @@ export default function UserPage() {
   const [orderBy, setOrderBy] = useState("name");
   const [filterName, setFilterName] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [ListeUtilisateurs, setListeUtilisateurs] = useState(UserList);
 
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget);
@@ -132,6 +134,12 @@ export default function UserPage() {
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
+  const handleDeleteUser = () => {
+    const result = SupprimerUtilisateur(ListeUtilisateurs, selected);
+    setListeUtilisateurs(result);
+    setSelected([]);
+  };
+
   return (
     <>
       <Container>
@@ -157,6 +165,7 @@ export default function UserPage() {
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
+            SupprimerUtilisateur={handleDeleteUser}
           />
 
           <Scrollbar>

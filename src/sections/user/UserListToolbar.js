@@ -8,6 +8,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Iconify } from "../../components/iconify";
+import { SupprimerUtilisateur } from "../../data/SupprimerUtilisateurs";
 
 const StyledRoot = styled(Toolbar)(({ theme }) => ({
   height: 96,
@@ -36,6 +37,7 @@ export default function UserListToolbar({
   numSelected,
   filterName,
   onFilterName,
+  SupprimerUtilisateur,
 }) {
   return (
     <StyledRoot
@@ -68,7 +70,7 @@ export default function UserListToolbar({
 
       {numSelected > 0 && (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={() => {}}>
             <Iconify icon="eva:trash-2-fill" />
           </IconButton>
         </Tooltip>

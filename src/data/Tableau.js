@@ -24,13 +24,13 @@ export const Tableau = ({
     {filteredUsers
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((row) => {
-        const { id, name, role, status, company, avatarUrl, isVerified } = row;
-        const selectedUser = selected.indexOf(name) !== -1;
+        const user = row;
+        const selectedUser = selected.indexOf(user.name) !== -1;
 
         return (
           <TableRow
             hover
-            key={id}
+            // key={}
             tabIndex={-1}
             role="checkbox"
             selected={selectedUser}
@@ -44,22 +44,22 @@ export const Tableau = ({
 
             <TableCell component="th" scope="row" padding="none">
               <Stack direction="row" alignItems="center" spacing={2}>
-                <Avatar alt={name} src={avatarUrl} />
+                <Avatar src={""} />
                 <Typography variant="subtitle2" noWrap>
-                  {name}
+                  {""}
                 </Typography>
               </Stack>
             </TableCell>
 
-            <TableCell align="left">{company}</TableCell>
+            <TableCell align="left">{""}</TableCell>
 
-            <TableCell align="left">{role}</TableCell>
+            <TableCell align="left">{""}</TableCell>
 
-            <TableCell align="left">{isVerified}</TableCell>
+            <TableCell align="left">{""}</TableCell>
 
             <TableCell align="left">
-              <Label color={(status === "Banned" && "error") || "success"}>
-                {status}
+              <Label color={(user.status === "Banned" && "error") || "success"}>
+                {""}
               </Label>
             </TableCell>
 
