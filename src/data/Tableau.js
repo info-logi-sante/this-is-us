@@ -25,7 +25,8 @@ export const Tableau = ({
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((row) => {
         const user = row;
-        const selectedUser = selected.indexOf(user.name) !== -1;
+        const name = user.name;
+        const selectedUser = selected.indexOf(name) !== -1;
 
         return (
           <TableRow
